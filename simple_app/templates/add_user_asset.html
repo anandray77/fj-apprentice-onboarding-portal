@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">Add New Asset</h1>
+    <form method="POST">
+        <!-- Input for Asset Name -->
+        <div class="form-group">
+            <label for="name">Asset Name:</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+        </div>
+        <!-- Input for Asset Description -->
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" class="form-control" required></textarea>
+        </div>
+        <!-- Dropdown to assign asset to a user -->
+        <select id="owner_id" name="owner_id" required>
+            <option value="" disabled selected>Select a User</option>
+            {% for user in users %}
+            <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }} ({{ user.role }})</option>
+            {% endfor %}
+        </select>
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary">Add Asset</button>
+    </form>
+    <!-- Back navigation link -->
+    <p><a href="{{ url_for('main.view_assets') }}">Back to Assets</a></p>
+</div>
+{% endblock %}

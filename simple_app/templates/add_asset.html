@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-center">Add New Asset</h1>
+<form method="POST" class="mt-4">
+    <div class="mb-3">
+        <label for="name" class="form-label">Asset Name:</label>
+        <input type="text" id="name" name="name" class="form-control" placeholder="Enter asset name" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <textarea id="description" name="description" class="form-control" placeholder="Enter asset description" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="owner_id" class="form-label">Assign to User:</label>
+        <select id="owner_id" name="owner_id" class="form-select" required>
+            <option value="" disabled selected>Select a User</option>
+            {% for user in users %}
+            <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }} ({{ user.role }})</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success w-100">Add Asset</button>
+</form>
+<p class="mt-3 text-center"><a href="{{ url_for('main.view_assets') }}" class="text-decoration-none">Back to Assets</a></p>
+{% endblock %}

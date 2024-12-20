@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1>Welcome to Your Dashboard</h1>
+    {% if session.get('user_role') == 'Admin' %}
+    <h2>Admin Overview</h2>
+    <div class="dashboard-stats">
+        <div>
+            <h3>Total Users</h3>
+            <p>{{ total_users }}</p>
+        </div>
+        <div>
+            <h3>Total Assets</h3>
+            <p>{{ total_assets }}</p>
+        </div>
+    </div>
+    <div>
+        <p><a class="btn" href="/users">Manage Users</a></p>
+        <p><a class="btn" href="/assets">Manage Assets</a></p>
+        <p><a class="btn" href="/assets/add">Add New Asset</a></p>
+    </div>
+    {% else %}
+    <h2>Your Assets</h2>
+    {% if user_assets %}
+    <ul>
+        {% for asset in user_assets %}
+        <li>
+            <strong>{{ asset.name }}</strong>: {{ asset.description }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>You have no assigned assets.</p>
+    {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

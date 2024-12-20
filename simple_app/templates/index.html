@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content">
+    <h1>Welcome to the IT Asset Management System</h1>
+    <div>
+        <a href="/register" class="btn">Register</a>
+        <a href="/login" class="btn">Login</a>
+    </div>
+    <p class="user-role">User Role: {{ session.get('user_role') }}</p>
+</div>
+{% endblock %}

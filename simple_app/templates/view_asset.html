@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Asset Details</h1>
+
+<!-- Display asset details -->
+<p><strong>Name:</strong> {{ asset.name }}</p>
+<p><strong>Description:</strong> {{ asset.description }}</p>
+<p><strong>Owner:</strong> {{ asset.owner.first_name }} {{ asset.owner.last_name }}</p>
+
+<!-- Back navigation link -->
+<p><a href="{{ url_for('main.view_assets') }}">Back to All Assets</a></p>
+{% endblock %}

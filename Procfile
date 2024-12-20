@@ -1,1 +1,1 @@
-web: gunicorn --bind 0.0.0.0:$PORT __init__:create_app()
+web: gunicorn "simple_app:create_app()"

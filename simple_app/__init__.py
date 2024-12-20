@@ -1,9 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import os
 
 # Initialize extensions
-db = SQLAlchemy() # SQLAlchemy for database management
+db = SQLAlchemy()  # SQLAlchemy for database management
 migrate = None  # Migration setup will be initialized later
 
 def create_app():
@@ -13,11 +14,12 @@ def create_app():
     # Secret key for session management
     app.secret_key = 'your_secret_key'
     
-    # Database configuration
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:pistachio1964@localhost/it_asset_management'
+    # Database configuration for SQLite
+    BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(BASE_DIR, "database.db")}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable unnecessary warnings
 
-    # Initialize database and migration extensions 
+    # Initialize database and migration extensions
     db.init_app(app)
     global migrate
     migrate = Migrate(app, db)
@@ -31,5 +33,3 @@ def create_app():
         db.create_all()
 
     return app
-
-

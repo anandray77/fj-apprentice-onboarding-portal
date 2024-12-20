@@ -1,2 +1,4 @@
-FLASK_APP=simple_app.py
+FLASK_APP=app:create_app
 FLASK_ENV=development
+SECRET_KEY=your_secret_key
+SQLALCHEMY_DATABASE_URI=mysql+pymysql://root:pistachio1964@localhost/it_asset_management

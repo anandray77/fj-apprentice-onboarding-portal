@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}My Portal{% endblock %}
+
+{% block content %}
+<div class="landing-container">
+  <div class="hero">
+    <h1>Welcome to Your Fujitsu Apprentice Portal</h1>
+    <p class="subtext">Helpful information to support you throughout your apprenticeship journey</p>
+  </div>
+
+  <div class="info-cards">
+    <div class="card" id="checklist">
+      <h3>📝 Your Checklist</h3>
+      <p>This is where your onboarding begins. Here's what you should aim to complete early on:</p>
+      <ul>
+        <li>✅ Submit your ID and eligibility documents</li>
+        <li>✅ Complete your Right to Work check</li>
+        <li>✅ Schedule your onboarding call</li>
+        <li>✅ Read the Welcome Pack and HR handbook</li>
+        <li>✅ Accept your offer and contract</li>
+      </ul>
+    </div>
+
+    <div class="card" id="mentor">
+      <h3>🤝 Meet Your Mentor</h3>
+      <p>Each apprentice is assigned a Buddy and an HR Reviewer:</p>
+      <ul>
+        <li>👤 Your Buddy is another apprentice or colleague who can answer questions and share tips</li>
+        <li>🧑‍💼 Your HR Reviewer supports you with goals, reviews, and wellbeing during your apprenticeship</li>
+      </ul>
+      <p>Expect contact via email or Teams within your first few days!</p>
+    </div>
+
+    <div class="card" id="dates">
+      <h3>📅 Important Dates</h3>
+      <p>Keep track of the following milestones (dates vary by intake):</p>
+      <ul>
+        <li>📌 Online induction (Week 1)</li>
+        <li>📌 Security briefing and mandatory training (Week 1–2)</li>
+        <li>📌 Welcome webinar and team intro (Week 2)</li>
+        <li>📌 First review with HR (Week 6)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>📚 Resources & Help</h3>
+      <p>Helpful documents:</p>
+      <ul>
+        <li><a href="#">Welcome Pack (PDF)</a></li>
+        <li><a href="#">Apprentice Handbook</a></li>
+        <li><a href="mailto:support@fujitsu.com">Contact the onboarding team</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Optional: Scroll to section from /my-portal#checklist, etc.
+  document.addEventListener("DOMContentLoaded", () => {
+    const hash = window.location.hash;
+    if (hash) {
+      const section = document.querySelector(hash);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  });
+</script>
+{% endblock %}

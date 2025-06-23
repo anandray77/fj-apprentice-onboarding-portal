@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}My Notes{% endblock %}
+
+{% block content %}
+<div class="landing-container">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>My Notes</h2>
+    <a href="{{ url_for('main.add_note') }}" class="btn btn-primary">Add New Note</a>
+  </div>
+
+  <p class="text-muted">Use this space to keep track of important onboarding updates, questions for your mentor, reminders about document submission, or anything else you want to log during your apprenticeship journey.</p>
+
+  {% if notes %}
+  <div class="table-responsive mt-4">
+    <table class="table table-striped table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Note</th>
+          <th>Description</th>
+          <th style="width: 180px;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for note in notes %}
+        <tr>
+          <td>{{ note.name }}</td>
+          <td>{{ note.description }}</td>
+          <td>
+                    <div class="d-flex align-items-center gap-2">
+                        <a href="{{ url_for('main.edit_note', note_id=note.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                        <form action="{{ url_for('main.delete_note', note_id=note.id) }}" method="POST" class="m-0 p-0" onsubmit="return confirm('Are you sure you want to delete this note?');">
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p>You haven’t created any notes yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

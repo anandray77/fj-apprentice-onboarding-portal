@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-center">Add a New Note</h1>
+<form method="POST" class="mt-4">
+    <p class="text-muted small">
+        Use this form to keep a private note for yourself, or assign it to an Admin (e.g. your HR Reviewer or Buddy).<br>
+        <strong>Note:</strong> If you assign the note to an Admin, it will no longer appear under your Notes page.  Please ensure to use the relevant names in the details section.
+    </p>
+
+    <div class="mb-3">
+        <label for="name" class="form-label">Your Name:</label>
+        <input type="text" id="name" name="name" class="form-control" placeholder="e.g. Submitted ID" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Details:</label>
+        <textarea id="description" name="description" class="form-control" placeholder="Describe your note..." required></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="owner_id" class="form-label">Assign To:</label>
+        <select class="form-select" name="owner_id" required>
+            <option value="{{ session.get('user_id') }}">Myself</option>
+            {% for admin in admins %}
+                <option value="{{ admin.id }}">{{ admin.first_name }} {{ admin.last_name }} (Admin)</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Submit Note</button>
+</form>
+{% endblock %}

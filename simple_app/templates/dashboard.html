@@ -1,40 +1,57 @@
 {% extends "base.html" %}
-
-{% block title %}Dashboard{% endblock %}
-
 {% block content %}
-<div class="content">
-    <h1>Welcome to Your Dashboard</h1>
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Welcome to Your Dashboard</h1>
+
     {% if session.get('user_role') == 'Admin' %}
-    <h2>Admin Overview</h2>
-    <div class="dashboard-stats">
-        <div>
-            <h3>Total Users</h3>
-            <p>{{ total_users }}</p>
+    <div class="admin-dashboard">
+        <h2>Admin Overview</h2>
+        <div class="stats-cards">
+            <div class="stat-card">
+                <h4>Total Users</h4>
+                <p class="stat-number">{{ total_users }}</p>
+            </div>
+            <div class="stat-card">
+                <h4>Total Candidates</h4>
+                <p class="stat-number">{{ total_candidates }}</p>
+            </div>
+            <div class="stat-card">
+                <h4>Total Notes</h4>
+                <p class="stat-number">{{ total_notes }}</p>
+            </div>
         </div>
-        <div>
-            <h3>Total Assets</h3>
-            <p>{{ total_assets }}</p>
+
+        <div class="admin-links mt-4">
+            <a href="{{ url_for('main.view_users') }}" class="btn btn-outline-dark">Manage Users</a>
+            <a href="{{ url_for('main.view_notes') }}" class="btn btn-outline-dark">View All Notes</a>
         </div>
     </div>
-    <div>
-        <p><a class="btn" href="/users">Manage Users</a></p>
-        <p><a class="btn" href="/assets">Manage Assets</a></p>
-        <p><a class="btn" href="/assets/add">Add New Asset</a></p>
+    {% else %}
+<div class="user-dashboard">
+    <h2>Your Application Status</h2>
+    <p class="status-note">You haven’t been assigned any onboarding steps yet. Please check back soon or contact HR.</p>
+
+    <div class="stats-cards mt-4">
+        <div class="stat-card">
+            <h4>Total Notes</h4>
+            <p class="stat-number">{{ total_notes }}</p>
+        </div>
+        <div class="stat-card">
+            <h4>Documents Uploaded</h4>
+            <p class="stat-number">{{ documents_uploaded }}</p>
+        </div>
+        <div class="stat-card">
+            <h4>Days Remaining</h4>
+            <p class="stat-number">{{ days_remaining }}</p>
+        </div>
     </div>
-    {% else %}
-    <h2>Your Assets</h2>
-    {% if user_assets %}
-    <ul>
-        {% for asset in user_assets %}
-        <li>
-            <strong>{{ asset.name }}</strong>: {{ asset.description }}
-        </li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p>You have no assigned assets.</p>
-    {% endif %}
+
+    <div class="user-links mt-4">
+        <a href="{{ url_for('main.view_notes') }}" class="btn btn-outline-dark">View My Notes</a>
+        <a href="{{ url_for('main.my_portal') }}" class="btn btn-outline-dark">Go to My Portal</a>
+    </div>
+</div>
+
     {% endif %}
 </div>
 {% endblock %}

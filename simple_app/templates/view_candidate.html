@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Candidate Details</h1>
+
+<p><strong>Name:</strong> {{ asset.name }}</p>
+<p><strong>Application Notes:</strong> {{ asset.description }}</p>
+<p><strong>HR Reviewer:</strong> {{ asset.owner.first_name }} {{ asset.owner.last_name }}</p>
+
+<p><a href="{{ url_for('main.view_assets') }}">Back to All Candidates</a></p>
+{% endblock %}

@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="text-center">All Assets</h1>
+<h1 class="text-center">All Notes</h1>
 <table class="table table-striped table-bordered mt-4">
     <thead>
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Description</th>
-            <th>Owner</th>
+            <th>Application Notes</th>
+            <th>HR Reviewer</th>
             {% if session.get('user_role') == 'Admin' %}
                 <th>Actions</th>
             {% endif %}
@@ -24,7 +24,7 @@
             {% if session.get('user_role') == 'Admin' %}
                 <td>
                     <a href="/assets/{{ asset.id }}/edit" class="btn btn-sm btn-warning">Edit</a>
-                    <form action="/assets/{{ asset.id }}/delete" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this asset?');">
+                    <form action="/assets/{{ asset.id }}/delete" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this candidate?');">
                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                     </form>
                 </td>
@@ -34,7 +34,7 @@
     </tbody>
 </table>
 {% if session.get('user_role') == 'Admin' %}
-    <p><a href="/assets/add" class="btn btn-success">Add New Asset</a></p>
+    <p><a href="/assets/add" class="btn btn-success">Add New Candidate</a></p>
 {% endif %}
 <p><a href="/" class="btn btn-secondary">Back to Home</a></p>
 {% endblock %}

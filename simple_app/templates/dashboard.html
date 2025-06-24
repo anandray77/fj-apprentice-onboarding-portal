@@ -1,11 +1,16 @@
 {% extends "base.html" %}
+
 {% block content %}
+<!-- Main dashboard layout -->
 <div class="container mt-4">
     <h1 class="text-center mb-4">Welcome to Your Dashboard</h1>
 
     {% if session.get('user_role') == 'Admin' %}
+      <!-- Admin view showing system-wide stats -->
     <div class="admin-dashboard">
         <h2>Admin Overview</h2>
+
+                <!-- Stat cards for admin metrics -->
         <div class="stats-cards">
             <div class="stat-card">
                 <h4>Total Users</h4>
@@ -22,15 +27,19 @@
         </div>
 
         <div class="admin-links mt-4">
+                    <!-- Admin shortcuts to user and note management -->
             <a href="{{ url_for('main.view_users') }}" class="btn btn-outline-dark">Manage Users</a>
             <a href="{{ url_for('main.view_notes') }}" class="btn btn-outline-dark">View All Notes</a>
         </div>
     </div>
+
     {% else %}
+        <!-- Regular user view: onboarding status and personal stats -->
 <div class="user-dashboard">
     <h2>Your Application Status</h2>
     <p class="status-note">You haven’t been assigned any onboarding steps yet. Please check back soon or contact HR.</p>
 
+    <!-- Stat cards for user-specific metrics -->
     <div class="stats-cards mt-4">
         <div class="stat-card">
             <h4>Total Notes</h4>
@@ -46,6 +55,7 @@
         </div>
     </div>
 
+        <!-- User shortcuts -->
     <div class="user-links mt-4">
         <a href="{{ url_for('main.view_notes') }}" class="btn btn-outline-dark">View My Notes</a>
         <a href="{{ url_for('main.my_portal') }}" class="btn btn-outline-dark">Go to My Portal</a>

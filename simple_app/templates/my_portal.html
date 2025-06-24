@@ -5,11 +5,15 @@
 {% block content %}
 <div class="landing-container">
   <div class="hero">
+    <!-- Welcome banner -->
     <h1>Welcome to Your Fujitsu Apprentice Portal</h1>
     <p class="subtext">Helpful information to support you throughout your apprenticeship journey</p>
   </div>
 
+  <!-- Information cards: checklist, mentors, dates, resources -->
   <div class="info-cards">
+
+        <!-- Checklist card -->
     <div class="card" id="checklist">
       <h3>📝 Your Checklist</h3>
       <p>This is where your onboarding begins. Here's what you should aim to complete early on:</p>
@@ -22,6 +26,7 @@
       </ul>
     </div>
 
+     <!-- Mentor card -->
     <div class="card" id="mentor">
       <h3>🤝 Meet Your Mentor</h3>
       <p>Each apprentice is assigned a Buddy and an HR Reviewer:</p>
@@ -32,6 +37,7 @@
       <p>Expect contact via email or Teams within your first few days!</p>
     </div>
 
+    <!-- Dates card -->
     <div class="card" id="dates">
       <h3>📅 Important Dates</h3>
       <p>Keep track of the following milestones (dates vary by intake):</p>
@@ -44,6 +50,7 @@
     </div>
 
     <div class="card">
+      <!-- Resources card -->
       <h3>📚 Resources & Help</h3>
       <p>Helpful documents:</p>
       <ul>
@@ -56,7 +63,7 @@
 </div>
 
 <script>
-  // Optional: Scroll to section from /my-portal#checklist, etc.
+  // <!-- Optional: scroll to #anchor section if navigated via hash -->
   document.addEventListener("DOMContentLoaded", () => {
     const hash = window.location.hash;
     if (hash) {

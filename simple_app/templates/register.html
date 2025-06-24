@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container mt-5">
+    <!-- Register form for new users or admins -->
     <h2 class="text-center mb-4">Register</h2>
 
     <form method="POST" action="{{ url_for(register_action) }}">
-        {{ form.hidden_tag() }}
+        {{ form.hidden_tag() }} <!-- CSRF protection -->
 
         {% for field, errors in form.errors.items() %}
             {% for error in errors %}
@@ -12,16 +13,19 @@
             {% endfor %}
         {% endfor %}
 
+        <!-- Email field -->
         <div class="mb-3">
             {{ form.email.label(class="form-label") }}
             {{ form.email(class="form-control", placeholder="Enter your email") }}
         </div>
 
+        <!-- Password and confirm fields -->
         <div class="mb-3">
             {{ form.password.label(class="form-label") }}
             {{ form.password(class="form-control", placeholder="Enter password") }}
         </div>
 
+        <!-- Name fields -->
         <div class="mb-3">
             {{ form.confirm_password.label(class="form-label") }}
             {{ form.confirm_password(class="form-control", placeholder="Confirm password") }}
@@ -37,11 +41,13 @@
             {{ form.last_name(class="form-control", placeholder="Last name") }}
         </div>
 
+        <!-- Submit button -->
         <div class="d-grid">
             {{ form.submit(class="btn btn-primary") }}
         </div>
     </form>
 
+    <!-- Link to login if user already exists -->
     <p class="mt-3 text-center">
         Already have an account?
         <a href="{{ url_for('main.login') }}" class="text-decoration-none">Log in</a>

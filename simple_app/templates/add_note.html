@@ -1,5 +1,8 @@
 {% extends "base.html" %}
+
 {% block content %}
+
+<!-- Form page for users to add a new personal note -->
 <h1 class="text-center">Add a New Note</h1>
 <form method="POST" class="mt-4">
     <p class="text-muted small">
@@ -7,10 +10,13 @@
         <strong>Note:</strong> If you assign the note to an Admin, it will no longer appear under your Notes page.  Please ensure to use the relevant names in the details section.
     </p>
 
+    <!-- Input for note title -->
     <div class="mb-3">
         <label for="name" class="form-label">Your Name:</label>
         <input type="text" id="name" name="name" class="form-control" placeholder="e.g. Submitted ID" required>
     </div>
+
+        <!-- Input for note content -->
     <div class="mb-3">
         <label for="description" class="form-label">Details:</label>
         <textarea id="description" name="description" class="form-control" placeholder="Describe your note..." required></textarea>
@@ -24,6 +30,7 @@
             {% endfor %}
         </select>
     </div>
+        <!-- Submit button to create the note -->
     <button type="submit" class="btn btn-primary w-100">Submit Note</button>
 </form>
 {% endblock %}

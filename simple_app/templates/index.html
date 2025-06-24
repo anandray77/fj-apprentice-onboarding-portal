@@ -5,15 +5,19 @@
 {% block content %}
 <div class="landing-container">
     <div class="hero text-center">
+        <!-- Header title -->
         <h1 class="mb-3">Software Development Apprenticeship Portal</h1>
 
         {% if session.get('user_id') %}
+        <!-- Display welcome message if user is logged in -->
          <p>Welcome, {{ session.get('user_first_name', 'User') }}!</p>
         {% endif %}
 
+        <!-- Site intro for all users -->
         <p class="lead">This is the official onboarding portal for Fujitsu apprentices.</p>
         <p><em>Here, you'll find your next steps, access onboarding resources, and stay up to date.</em></p>
 
+        <!-- Call to action buttons for guests -->
         {% if not session.get('user_id') %}
         <div class="cta-buttons my-4">
             <a href="/register" class="btn btn-primary mx-2">Register</a>
@@ -21,6 +25,7 @@
         </div>
         {% endif %}
 
+        <!-- Info cards leading to portal sections -->
         <div class="info-cards d-flex justify-content-center gap-4 flex-wrap mt-4">
             <a href="/my-portal" class="text-decoration-none">
                 <div class="card shadow-sm p-3" style="width: 18rem;">
@@ -42,6 +47,7 @@
             </a>
         </div>
 
+        <!-- Footer help and user role note -->
         <div class="footer-note mt-5">
             <p class="mb-1">Having trouble? <a href="mailto:support@fujitsu.com">Contact the onboarding team</a>.</p>
             <p class="text-muted small">Your role: {{ session.get('user_role', 'Guest') }}</p>

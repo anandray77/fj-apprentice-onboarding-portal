@@ -1,15 +1,23 @@
 {% extends "base.html" %}
+
 {% block content %}
+<!-- Edit note form: accessible to owner or admin -->
 <h1 class="text-center">Edit Note</h1>
 <form method="POST" class="mt-4">
+
+        <!-- Note title field -->
     <div class="mb-3">
         <label for="name" class="form-label">Note Title:</label>
         <input type="text" id="name" name="name" class="form-control" value="{{ note.name }}" required>
     </div>
+
+        <!-- Note description field -->
     <div class="mb-3">
         <label for="description" class="form-label">Details:</label>
         <textarea id="description" name="description" class="form-control" required>{{ note.description }}</textarea>
     </div>
+
+        <!-- Submit update button -->
     <button type="submit" class="btn btn-primary w-100">Update Note</button>
 </form>
 {% endblock %}

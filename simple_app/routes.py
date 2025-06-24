@@ -7,6 +7,7 @@ from . import db
 main = Blueprint('main', __name__)
 
 def is_admin():
+      # Check if current user has Admin role
     return session.get('user_role') == 'Admin'
 
 @main.route('/')
@@ -14,6 +15,7 @@ def home():
     return render_template('index.html')
 
 @main.route('/register', methods=['GET', 'POST'])
+# Register route for creating a new regular user
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
@@ -23,6 +25,7 @@ def register():
         first_name = form.first_name.data
         last_name = form.last_name.data
 
+        # Prevent duplicate registration
         if User.query.filter_by(email=email).first():
             flash("Email already registered!", "error")
             return redirect(url_for('main.register'))
@@ -43,6 +46,7 @@ def register():
 @main.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        # Authenticate user and set session
         email = request.form.get('email')
         password = request.form.get('password')
         user = User.query.filter_by(email=email).first()
@@ -50,9 +54,10 @@ def login():
             flash("Invalid email or password!", "error")
             return redirect(url_for('main.login'))
 
+        # Store user session
         session['user_id'] = user.id
         session['user_role'] = user.role
-        session['user_first_name'] = user.first_name  # ✅ Add this line
+        session['user_first_name'] = user.first_name  
 
         flash(f"Welcome, {user.first_name}!", "success")
         return redirect(url_for('main.home'))
@@ -60,11 +65,13 @@ def login():
 
 @main.route('/logout')
 def logout():
+    # Clear all session data
     session.clear()
     flash("Logged out successfully!", "success")
     return redirect(url_for('main.home'))
 
 @main.route('/users')
+# Admin-only view of all users
 def view_users():
     if not is_admin():
         return "Access denied. Admins only.", 403
@@ -72,6 +79,7 @@ def view_users():
     return render_template('users.html', users=users)
 
 @main.route('/assets')
+# Show user's assets if not Admin, else show all assets
 def view_assets():
     if session.get('user_role') == 'User':
         user_id = session.get('user_id')
@@ -82,6 +90,7 @@ def view_assets():
 
 @main.route('/assets/add', methods=['GET', 'POST'])
 def add_asset():
+    # Admins can add assets to the system
     if session.get('user_role') != 'Admin':
         return "Access denied.", 403
     if request.method == 'POST':
@@ -121,7 +130,7 @@ def edit_asset(asset_id):
         flash("Asset updated successfully!", "success")
         return redirect(url_for('main.view_assets'))
     users = User.query.all() if is_admin() else None
-    return render_template('edit_candidate.html', asset=asset, users=users)
+    return render_template('edit_user.html', asset=asset, users=users)
 
 @main.route('/assets/<int:asset_id>/delete', methods=['POST'])
 def delete_asset(asset_id):
@@ -188,7 +197,7 @@ def add_note():
 
         return redirect(url_for('main.view_notes'))
 
-    # 🔁 Role-based user filtering
+    # Role-based user filtering
     if session.get('user_role') == 'Admin':
         users = User.query.all()
     else:
@@ -237,7 +246,6 @@ def register_admin():
             flash("Email already registered!", "error")
             return render_template('register.html', form=form, register_action='main.register_admin')
 
-        # ✅ Force role to Admin
         new_user = User(
             email=email,
             password=hashed_password,

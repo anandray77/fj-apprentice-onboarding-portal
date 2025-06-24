@@ -1,6 +1,6 @@
 # Fujitsu Apprentice Onboarding Portal
 
-A lightweight Flask web application designed to support apprentices during their onboarding experience at Fujitsu. This portal includes tailored features for both regular users and administrators, ensuring a clear, accessible, and role-specific experience.
+A lightweight Flask web application designed to support apprentices during their onboarding experience at Fujitsu. The portal offers tailored features for both apprentices and administrators, delivering a role-specific, intuitive onboarding experience.
 
 ---
 
@@ -8,136 +8,135 @@ A lightweight Flask web application designed to support apprentices during their
 
 ### For Apprentices
 - Register, log in, and manage personal notes
-- Access your personal onboarding checklist
-- Track document uploads, important dates, and application progress
+- Access a personalised onboarding checklist
+- Track document uploads, application progress, and key dates
 
 ### For Admins
 - View and manage all registered users
-- View all apprentice notes
-- Register new admins
-- Access system-wide dashboard metrics (user count, note totals, etc.)
+- View notes submitted by all apprentices
+- Register new admin accounts
+- Access system-wide metrics (e.g. total users, notes)
 
 ---
 
 ## Tech Stack
 
-- **Backend**: Python 3, Flask
-- **Frontend**: HTML, Jinja2 templating, Bootstrap 5
-- **Database**: SQLite3 (via SQLAlchemy)
-- **Forms**: WTForms
-- **Testing**: `unittest`, `coverage`
-- **Containerisation**: Docker
-- **Source Control**: Git + GitHub
+- **Backend:** Python 3 + Flask
+- **Frontend:** HTML, Jinja2, Bootstrap 5
+- **Database:** SQLite (SQLAlchemy ORM)
+- **Forms:** WTForms
+- **Testing:** `unittest`, `coverage`
+- **Containerisation:** Docker
+- **Version Control:** Git + GitHub
 
 ---
 
 ## Project Structure
 
+```
+fj-apprentice-onboarding-portal/
 ├── simple_app/
-│ ├── init.py # App factory and setup
-│ ├── models.py # SQLAlchemy models
-│ ├── forms.py # WTForm classes
-│ ├── routes.py # Main route logic
-│ ├── templates/ # Jinja2 HTML templates
-│ ├── static/ # CSS files
-│ └── database.db # SQLite DB
-├── tests/ # Unit tests
+│   ├── __init__.py
+│   ├── auth.py
+│   ├── forms.py
+│   ├── models.py
+│   ├── routes.py
+│   ├── templates/
+│   └── static/
+├── tests/
 ├── requirements.txt
 ├── Dockerfile
-├── .gitignore
 ├── README.md
-
+├── app.py
+├── .flaskenv
+├── .gitignore
+└── database.db
+```
 
 ---
 
-
 ## Setup Instructions
 
+### Local Setup (Python)
 
+```bash
 # 1. Clone the repo
 git clone https://github.com/anandray77/fj-apprentice-onboarding-portal
 cd fj-apprentice-onboarding-portal
 
 # 2. Create Virtual Environment
 python -m venv venv
-venv\\Scripts\\activate   # (Windows)
+venv\Scripts\activate     # Windows
 
 # 3. Install Dependencies
 pip install -r requirements.txt
 
 # 4. Run the App
 flask run
-App will be live at http://localhost:5000
+# Visit: http://localhost:5000
+```
 
-Docker Instructions
+### Docker Setup
 
-# Build the Docker image
+# Build Docker Image
 docker build -t fj-portal .
 
-# Run the app in a container
+# Run Container
 docker run -p 5000:5000 fj-portal
-App accessible at http://localhost:5000 inside the container
+# App will be live at: http://localhost:5000
+```
 
+---
 
-Testing & Coverage
+## Testing & Coverage
 
 # Run all unit tests
 python -m unittest discover tests
 
-# Measure code coverage
+# Check test coverage
 coverage run -m unittest discover tests
 coverage report
-Test Coverage Report
-matlab
+```
 
+**Coverage Summary:**
+
+```
 simple_app/__init__.py      100%
 simple_app/forms.py         100%
 simple_app/models.py         90%
-simple_app/routes.py         24%
-TOTAL                        44%
+simple_app/routes.py         42%
+tests/test_basic.py          97%
+tests/test_routes.py        100%
+TOTAL                        64%
+```
 
-Includes tests for:
+---
 
-Homepage accessibility
-Login (valid and invalid credentials)
-Note creation (by logged-in users)
-Access denial (non-authenticated users)
+## Secure Coding Practices
 
+- Password hashing with `werkzeug.security` (`pbkdf2:sha256`)
+- Form validation using WTForms
+- Role-based access control (Admin vs User)
+- CSRF protection
+- Flash messages and user feedback
 
-Secure Coding & Academic Conventions
+---
 
-Passwords hashed with pbkdf2:sha256
-Input validation with WTForms
-Role-based access (User vs Admin)
-Consistent naming, indentation, and modular design
-Flash messages and user feedback with proper grammar
+## 🔍 Example Accounts
 
-📸 Screenshots
-Add screenshots of:
+**Admin:**
+- Email: `MacRzepa@fujitsu.com`
+- Password: `Abigail123!`
 
-Homepage
+**User:**
+- Email: `JennyDoeAspiringApprentice@hotmail.com`
+- Password: `Abigail123!`
 
-Admin dashboard
+---
 
-User portal
+## License & Acknowledgements
 
-Notes management
+**License:** Academic use only
 
-Docker CLI output
-
-
-Example Accounts
-
-Admin
-Email: MacRzepa@fujitsu.com
-Password: Abigail123!
-
-User
-Email: JennyDoeAspiringApprentice@hotmail.com
-Password: Abigail123!
-
-License
-This project is for academic demonstration purposes only.
-
-Acknowledgements
-Thanks to Fujitsu UK for providing the context for this apprenticeship-ready portal. Built with ❤️ using Flask and Bootstrap.
+**Acknowledgements:**  
+Thanks to Fujitsu UK for providing the context and brief for this final-year university project. Built with ❤️ using Flask, Bootstrap, and lots of coffee.
